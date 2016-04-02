@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby -Ilib
+
+require 'form_bridge'
+
+FormBridge::CLI.new(ARGV).start
