@@ -3,16 +3,24 @@ module FormBridge
     attr_accessor :options
 
     def initialize(args)
-      self.options = {logger: Logger.new(STDOUT)}
+      self.options = {logger: Logger.new(STDOUT), port: 8080, host: 'localhost'}
 
       OptionParser.new do |parser|
         parser.banner = [
-          "Usage: #{@name} -P /tmp/database.db\n",
+          "Usage: #{@name} -d /tmp/database.db\n",
           "       #{@name} --help\n"
         ].compact.join
 
-        parser.on('-P', '--path PATH') do |path|
+        parser.on('-d', '--database PATH') do |path|
           self.options[:db] = FormBridge::Persistance.new(GDBM.new(path))
+        end
+
+        parser.on('-h', '--host HOST') do |host|
+          self.options[:host] = host
+        end
+
+        parser.on('-p', '--port PORT') do |port|
+          self.options[:port] = port
         end
 
         parser.on_tail("-?", "--help", "Display this usage information.") do

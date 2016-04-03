@@ -19,9 +19,6 @@ module FormBridge
     end
 
     def append_all(attributes={})
-      puts "Appending:"
-      p attributes
-
       attributes.each {|k,v| append(k,v)}
       self
     end

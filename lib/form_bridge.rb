@@ -1,5 +1,6 @@
 require "form_bridge/version"
 require "logger"
+require "uri"
 require "optparse"
 require "securerandom"
 require "json"
@@ -9,7 +10,7 @@ require "rack/handler/puma"
 
 module FormBridge
   module_function def map(options, &block)
-    FormBridge::Handler.new(FormBridge::Router.build(options, &block))
+    FormBridge::Handler.new(options, FormBridge::Router.build(options, &block))
   end
 end
 
